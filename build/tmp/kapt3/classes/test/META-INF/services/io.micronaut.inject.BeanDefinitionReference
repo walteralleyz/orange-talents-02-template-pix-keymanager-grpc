@@ -1,0 +1,17 @@
+br.com.zup.$Clients$GrpcList4DefinitionClass
+br.com.zup.utils.$AccountTypeValidatorTestDefinitionClass
+br.com.zup.$Clients$GrpcRegistry0DefinitionClass
+br.com.zup.$Clients$GrpcRetrieve2DefinitionClass
+br.com.zup.$KeymgrTestDefinitionClass
+br.com.zup.pix.endpoint.$RetrieveEndpointTestDefinitionClass
+br.com.zup.utils.$ExtensionsTestDefinitionClass
+br.com.zup.utils.$KeyValidatorTestDefinitionClass
+br.com.zup.pix.endpoint.$RemoveEndpointTestDefinitionClass
+br.com.zup.repository.$PixRepositoryTestDefinitionClass
+br.com.zup.pix.endpoint.$ExternEndpointTestDefinitionClass
+br.com.zup.$ClientsDefinitionClass
+br.com.zup.pix.endpoint.$RegistryEndpointTestDefinitionClass
+br.com.zup.$Clients$GrpcExtern3DefinitionClass
+br.com.zup.pix.service.$RetrieveServiceTestDefinitionClass
+br.com.zup.pix.endpoint.$ListEndpointTestDefinitionClass
+br.com.zup.$Clients$GrpcRemove1DefinitionClass

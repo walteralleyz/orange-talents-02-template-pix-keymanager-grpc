@@ -1,0 +1,7 @@
+br.com.zup.pix.remove.$RemoveValidatedRequest$IntrospectionRef
+br.com.zup.pix.list.$ListValidatedRequest$IntrospectionRef
+br.com.zup.pix.$Pix$IntrospectionRef
+br.com.zup.pix.retrieve.intern.$RetrieveValidatedRequest$IntrospectionRef
+br.com.zup.pix.registry.$RegistryValidatedRequest$IntrospectionRef
+br.com.zup.account.$Account$IntrospectionRef
+br.com.zup.pix.retrieve.extern.$RetrieveValidatedRequest$IntrospectionRef

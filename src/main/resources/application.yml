@@ -1,0 +1,26 @@
+micronaut:
+  application:
+    name: keymgr
+
+datasources:
+  default:
+    url: jdbc:h2:mem:devDb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+    dialect: H2
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        bytecode:
+          provider: none
+
+grpc:
+  server:
+    port: 8080
+    keep-alive-time: 3h
+    max-inbound-message-size: 1024
