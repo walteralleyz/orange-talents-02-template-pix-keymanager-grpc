@@ -1,6 +1,5 @@
 package br.com.zup.repository
 
-import br.com.zup.exception.internal.NotFoundException
 import br.com.zup.pix.Pix
 import io.micronaut.data.annotation.Repository
 import io.micronaut.transaction.SynchronousTransactionManager
@@ -28,13 +27,24 @@ open class PixRepository(
         }
     }
 
-    fun findByPixId(id: Int): Pix? {
+    fun findByPixAndClient(pix: String, client: String): Pix? {
         return transactionManager.executeRead {
             try {
                 entityManager.createQuery(
-                    "from Pix p where p.id = :id",
+                    "from Pix p where p.pix = :pix and p.clientId = :client",
                     Pix::class.java
-                ).setParameter("id", id).singleResult
+                ).setParameter("pix", pix).setParameter("client", client).singleResult
+            } catch (e: NoResultException) { null }
+        }
+    }
+
+    fun findByPixIdAndClient(id: Int, client: String): Pix? {
+        return transactionManager.executeRead {
+            try {
+                entityManager.createQuery(
+                    "from Pix p where p.id = :id and p.clientId = :client",
+                    Pix::class.java
+                ).setParameter("id", id).setParameter("client", client).singleResult
             } catch (e: NoResultException) { null }
         }
     }

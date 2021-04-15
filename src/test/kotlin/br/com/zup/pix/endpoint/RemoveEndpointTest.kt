@@ -2,6 +2,7 @@ package br.com.zup.pix.endpoint
 
 import br.com.zup.*
 import br.com.zup.account.Account
+import br.com.zup.exception.internal.RequestException
 import br.com.zup.pix.Pix
 import io.grpc.Status
 import io.grpc.StatusRuntimeException
@@ -54,8 +55,8 @@ class RemoveEndpointTest(
                 .build()
             )
         }.let {
-            assertEquals(Status.NOT_FOUND.code, it.status.code)
-            assertEquals("Pix não registrada no sistema", it.status.description)
+            assertEquals(Status.PERMISSION_DENIED.code, it.status.code)
+            assertEquals("Chave pix não encontrada para usuário", it.status.description)
         }
     }
 
@@ -88,8 +89,15 @@ class RemoveEndpointTest(
                 .build()
             )
         }.run {
-            assertEquals(this.status.code, Status.ALREADY_EXISTS.code)
+            assertEquals(Status.NOT_FOUND.code, this.status.code)
             assertEquals(this.status.description, "Não foi possivel remover essa chave dos nossos registros")
         }
+    }
+
+    @Test
+    fun `should throw an error for invalid request`() {
+        assertThrows<StatusRuntimeException> {
+            grpcRemove.remove(KeymgrExcludeRequest.newBuilder().build())
+        }.let { assertEquals("Todos os dados devem ser preenchidos", it.status.description) }
     }
 }

@@ -2,6 +2,7 @@ package br.com.zup.utils
 
 import br.com.zup.*
 import br.com.zup.bcb.BCBClient
+import br.com.zup.exception.internal.ExceptionType
 import br.com.zup.exception.internal.makeException
 import br.com.zup.pix.list.ListValidatedRequest
 import br.com.zup.pix.retrieve.extern.RetrieveValidatedRequest as RetrieveExternal
@@ -38,8 +39,3 @@ fun AccountType.readable() : String {
     return if(this == AccountType.CACC) "CONTA_CORRENTE"
     else "CONTA_POUPANCA"
 }
-
-fun BCBClient.bcbGetterInfo(pix: String) = this.retrieve(pix)?.let {
-    it.body.orElseThrow { makeException("request") }
-    it
-} ?: throw makeException("request")

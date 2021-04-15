@@ -13,7 +13,7 @@ import io.micronaut.retry.annotation.Fallback
 import io.micronaut.retry.annotation.Recoverable
 
 @Recoverable
-@Client("http://localhost:8082/api/v1/pix/keys")
+@Client("\${external.uri.bcb}/api/v1/pix/keys")
 interface BCBClient {
 
     @Post(processes = [MediaType.APPLICATION_XML])

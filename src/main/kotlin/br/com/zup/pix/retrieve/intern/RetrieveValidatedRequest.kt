@@ -20,6 +20,7 @@ data class RetrieveValidatedRequest(
         .setClientId(pix.clientId)
         .setPixType(pix.pixType)
         .setPix(pix.pix)
+        .setCreatedAt(pix.createdAt.toString())
         .setAccountInfo(AccountInfo.newBuilder()
             .setAccountType(pix.accountType)
             .setName(pix.accountInfo.client)

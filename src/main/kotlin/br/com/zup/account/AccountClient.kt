@@ -8,7 +8,7 @@ import io.micronaut.retry.annotation.Fallback
 import io.micronaut.retry.annotation.Recoverable
 
 @Recoverable
-@Client("http://localhost:9091/api/v1/clientes")
+@Client("\${external.uri.itau}/api/v1/clientes")
 interface AccountClient {
 
     @Get("/{id}/contas{?tipo}")

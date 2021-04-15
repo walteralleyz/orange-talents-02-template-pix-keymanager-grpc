@@ -4,11 +4,11 @@ micronaut:
 
 datasources:
   default:
-    url: jdbc:h2:mem:devDb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-    dialect: H2
+    url: ${JPA_URI:`jdbc:h2:mem:devDb`}
+    driverClassName: ${JPA_DRIVER:`org.h2.Driver`}
+    username: ${JPA_USER:`sa`}
+    password: ${JPA_PASS:``}
+    dialect: ${JPA_DIALECT:`H2`}
 
 jpa:
   default:
@@ -21,6 +21,10 @@ jpa:
 
 grpc:
   server:
-    port: 8080
     keep-alive-time: 3h
     max-inbound-message-size: 1024
+
+external:
+  uri:
+    itau: ${ITAU_URI:`http://localhost:9091`}
+    bcb: ${BCB_URI:`http://localhost:8082`}

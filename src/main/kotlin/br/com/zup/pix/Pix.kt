@@ -19,13 +19,13 @@ class Pix(
     val accountType: AccountType,
 
     @OneToOne(cascade = [CascadeType.MERGE])
-    val accountInfo: Account,
-
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    val accountInfo: Account
 ) {
 
     @Id @GeneratedValue
     val id: Int? = null
+
+    val createdAt: LocalDateTime = LocalDateTime.now()
 
     fun toResponse(): KeymgrRegistryResponse = KeymgrRegistryResponse.newBuilder().setId(id!!).build()
 

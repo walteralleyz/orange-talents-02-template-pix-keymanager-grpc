@@ -4,7 +4,9 @@ import br.com.zup.*
 import io.grpc.Status
 import io.grpc.StatusRuntimeException
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -14,6 +16,26 @@ class ListEndpointTest(
     private val grpcRegistry: KeymgrRegistryServiceGrpc.KeymgrRegistryServiceBlockingStub,
     private val grpcRemove: KeymgrRemoveServiceGrpc.KeymgrRemoveServiceBlockingStub
 ) {
+
+    @BeforeEach
+    fun setup() {
+        grpcRegistry.registry(KeymgrRegistryRequest.newBuilder()
+            .setPix("11122233344")
+            .setPixType(KeyType.CPF)
+            .setClientId("c56dfef4-7901-44fb-84e2-a2cefb157890")
+            .setAccountType(AccountType.CACC)
+            .build()
+        )
+    }
+
+    @AfterEach
+    fun destroy() {
+        grpcRemove.remove(KeymgrExcludeRequest.newBuilder()
+            .setPix("11122233344")
+            .setClientId("c56dfef4-7901-44fb-84e2-a2cefb157890")
+            .build()
+        )
+    }
 
     @Test
     fun `should return an empty list`() {
@@ -35,14 +57,6 @@ class ListEndpointTest(
 
     @Test
     fun `should return an array filled with one response`() {
-        grpcRegistry.registry(KeymgrRegistryRequest.newBuilder()
-            .setPix("54555658451")
-            .setPixType(KeyType.CPF)
-            .setClientId("c56dfef4-7901-44fb-84e2-a2cefb157890")
-            .setAccountType(AccountType.CACC)
-            .build()
-        )
-
         grpcList.readAll(KeymgrReadAllRequest.newBuilder()
             .setClientId("c56dfef4-7901-44fb-84e2-a2cefb157890")
             .build()
@@ -50,11 +64,5 @@ class ListEndpointTest(
             assertEquals(1, it.responseList.size)
             assertEquals("c56dfef4-7901-44fb-84e2-a2cefb157890", it.responseList[0].clientId)
         }
-
-        grpcRemove.remove(KeymgrExcludeRequest.newBuilder()
-            .setPix("54555658451")
-            .setClientId("c56dfef4-7901-44fb-84e2-a2cefb157890")
-            .build()
-        )
     }
 }

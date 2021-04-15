@@ -44,4 +44,11 @@ class PixRepositoryTest(
 
         assertNull(repo.findByPix("12345679811"))
     }
+
+    @Test
+    fun `should not found some entity`() {
+        val nullable: Pix? = repo.findByPix("asdfsdfsdf")
+
+        assertNull(nullable)
+    }
 }

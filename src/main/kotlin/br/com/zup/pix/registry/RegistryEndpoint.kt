@@ -12,13 +12,22 @@ import javax.inject.Singleton
 class RegistryEndpoint(private val service: RegistryService) : KeymgrRegistryServiceGrpc.KeymgrRegistryServiceImplBase() {
     override fun registry(req: KeymgrRegistryRequest, responseObserver: StreamObserver<KeymgrRegistryResponse>) {
         isValidPixKey(req.pix, req.pixType)?.let {
-            errorResponse(responseObserver, it, Status.INVALID_ARGUMENT)
+            responseObserver.onError(
+                Status.INVALID_ARGUMENT
+                    .withDescription(it)
+                    .asRuntimeException()
+            )
+
 
             return
         }
 
         isAccountValid(req.accountType)?.let {
-            errorResponse(responseObserver, it, Status.INVALID_ARGUMENT)
+            responseObserver.onError(
+                Status.INVALID_ARGUMENT
+                    .withDescription(it)
+                    .asRuntimeException()
+            )
 
             return
         }
